@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -22,7 +25,9 @@ function SignUp() {
 
     const data = await response.json();
 
-    console.log(data);
+    if (data.status === "ok") {
+      Navigate.push("/login");
+    }
   };
 
   const handleChange = (event) => {};
